@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escáner QR — Webcam</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>📷 Escáner de QR</h1>
+    <div class="header-controls">
+      <label for="camera-select">Cámara:</label>
+      <select id="camera-select" disabled></select>
+      <button id="toggle-scan" disabled>Iniciar</button>
+      <span id="status" class="status status-idle">● Detenido</span>
+      <span id="sage-status" class="sage-status sage-off" title="Sin conexión con sage">
+        <span class="sage-dot"></span>sage
+      </span>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <section class="video-panel">
+      <div class="video-wrap" id="video-wrap">
+        <video id="video" autoplay playsinline muted></video>
+        <canvas id="scan-canvas" hidden></canvas>
+        <div class="scan-frame">
+          <span class="corner tl"></span>
+          <span class="corner tr"></span>
+          <span class="corner bl"></span>
+          <span class="corner br"></span>
+        </div>
+        <div id="video-placeholder" class="video-placeholder">
+          <p>🎥 Cámara no disponible o no iniciada.</p>
+          <p id="video-error" class="video-error"></p>
+        </div>
+      </div>
+    </section>
+
+    <aside class="side-panel">
+      <div class="card last-token">
+        <h2>Último token</h2>
+        <div id="last-token" class="last-token-value">—</div>
+        <div id="last-token-raw" class="last-token-raw"></div>
+        <div class="actions">
+          <button id="copy-token" disabled>Copiar token</button>
+        </div>
+      </div>
+
+      <div class="card result" id="result-card" hidden>
+        <h2>Respuesta de sage</h2>
+        <div id="result-status" class="result-status">Sin escaneos todavía</div>
+        <div id="result-guest" class="result-guest"></div>
+        <div id="result-detail" class="result-detail"></div>
+        <div id="result-state" class="result-state"></div>
+        <div id="result-message" class="result-message"></div>
+      </div>
+
+      <div class="card history" id="history-card" hidden>
+        <h2>Historial de accesos <span id="history-count" class="badge">0</span></h2>
+        <div class="actions history-actions">
+          <button id="clear-list">Limpiar</button>
+        </div>
+        <ol id="history-list" class="history-list"></ol>
+      </div>
+
+      <div class="card debug">
+        <h2>Diagnóstico</h2>
+        <div class="debug-row">
+          <canvas id="preview-canvas" width="160" height="90"></canvas>
+          <div class="debug-info">
+            <div id="debug-fps">FPS: —</div>
+            <div id="debug-res">Frame: —</div>
+            <div id="debug-state">Estado: —</div>
+          </div>
+        </div>
+        <div class="actions debug-actions">
+          <button id="test-image">Probar con imagen</button>
+          <input type="file" id="image-input" accept="image/*" hidden />
+        </div>
+        <p class="debug-hint">
+          Consejos: iluminá bien el QR, mantenelo quieto, que ocupe buena parte
+          del recuadro y acercá/alejá la cámara hasta que enfoque.
+        </p>
+      </div>
+    </aside>
+  </main>
+
+  <script src="jsqr.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

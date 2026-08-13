@@ -1,0 +1,9 @@
+{
+  "name": "qr-scanner",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Escáner de QR con webcam: decodifica QR en tiempo real y muestra el token en la UI.",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
